@@ -166,7 +166,20 @@ public class AllAnimeLinkUtils {
                     if (!decrypted.contains("https://")) {
                         AnimeStreamingModel decryptedModel = getUrl(decrypted);
                         if(decryptedModel == null) continue;
-                        streamingSources.add(new AnimeStreamingSource("S-mp4",decryptedModel.links.get(0).link, decryptedModel.links.get(0).mp4));
+                        String link = decryptedModel.links.get(0).link;
+                        // just check if link contains mp4 or m3u8 or m3u
+                        if (link.contains(".mp4") || link.contains(".m3u8") || link.contains(".m3u")) {
+                            boolean ismp4;
+                            if (link.contains(".mp4")) {
+                                ismp4 = true;
+                            } else {
+                                ismp4 = false;
+                            }
+                            streamingSources.add(new AnimeStreamingSource("S-mp4", link, ismp4));
+                        }else{
+                            //for links like sharepoint.aspx ...
+                            streamingSources.add(new AnimeStreamingSource("S-mp4",decryptedModel.links.get(0).link, decryptedModel.links.get(0).mp4));
+                        }
                     } else {
                         streamingSources.add(new AnimeStreamingSource("S-mp4", decrypted, true));
                     }
@@ -176,7 +189,19 @@ public class AllAnimeLinkUtils {
                     if (!decrypted.contains("https://")) {
                         AnimeStreamingModel decryptedModel = getUrl(decrypted);
                         if(decryptedModel == null) continue;
-                        streamingSources.add(new AnimeStreamingSource("Luf-mp4",decryptedModel.links.get(0).link, decryptedModel.links.get(0).mp4));
+                        String link = decryptedModel.links.get(0).link;
+                        if (link.contains(".mp4") || link.contains(".m3u8") || link.contains(".m3u")){
+                            boolean ismp4;
+                            if (link.contains(".mp4")) {
+                                ismp4 = true;
+                            } else {
+                                ismp4 = false;
+                            }
+                            streamingSources.add(new AnimeStreamingSource("Luf-mp4", link, ismp4));
+                        }else{
+                            streamingSources.add(new AnimeStreamingSource("Luf-mp4",decryptedModel.links.get(0).link, decryptedModel.links.get(0).mp4));
+                        
+                        }
                     } else {
                         streamingSources.add(new AnimeStreamingSource("Luf-mp4", decrypted, true));
                     }
@@ -186,7 +211,19 @@ public class AllAnimeLinkUtils {
                     if (!decrypted.contains("https://")) {
                         AnimeStreamingModel decryptedModel = getUrl(decrypted);
                         if(decryptedModel == null) continue;
-                        streamingSources.add(new AnimeStreamingSource("Yt-mp4",decryptedModel.links.get(0).link, decryptedModel.links.get(0).mp4));
+                        String link = decryptedModel.links.get(0).link;
+                        if (link.contains(".mp4") || link.contains(".m3u8") || link.contains(".m3u")){
+                            boolean ismp4;
+                            if (link.contains(".mp4")) {
+                                ismp4 = true;
+                            } else {
+                                ismp4 = false;
+                            }
+                            streamingSources.add(new AnimeStreamingSource("Yt-mp4", link, ismp4));
+                        }else{
+                            streamingSources.add(new AnimeStreamingSource("Yt-mp4",decryptedModel.links.get(0).link, decryptedModel.links.get(0).mp4));
+                        }
+                        
                     } else {
                         streamingSources.add(new AnimeStreamingSource("Yt-mp4", decrypted, true));
                     }
