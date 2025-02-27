@@ -1,7 +1,7 @@
 name: "Pre Release android build"
 on:
   push:
-    branches: [ pre-release ]
+    branches: [ prerelease ]
 
 jobs:
   build:
