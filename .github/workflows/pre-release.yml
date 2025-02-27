@@ -1,7 +1,7 @@
 name: "Pre Release android build"
 on:
   push:
-    branches: [ prerelease ]
+    branches: [ pre-release ]
 
 jobs:
   build:
@@ -22,7 +22,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build the apk
-        run: ./gradlew assembleRelease --stacktrace
+        run: ./gradlew assembleDebug --stacktrace
       
       - name: Get build tool version
         shell: bash
@@ -43,7 +43,7 @@ jobs:
         uses: r0adkll/sign-android-release@v1
         id: sign_app
         with:
-          releaseDirectory: app/build/outputs/apk/release
+          releaseDirectory: app/build/outputs/apk/debug
           signingKeyBase64: ${{ secrets.SIGNING_KEY }}
           alias: ${{ secrets.KEY_ALIAS }}
           keyStorePassword: ${{ secrets.KEY_PASSWORD }}
